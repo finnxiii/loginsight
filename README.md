@@ -1,6 +1,6 @@
 # LogInsight — Web Traffic Analysis Tool
 
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-2E2E2E?logo=github&logoColor=white)](https://github.com/yourusername/loginsight)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-2E2E2E?logo=github&logoColor=white)](https://github.com/finnxiii/loginsight)
 ![IEUK 2025](https://img.shields.io/badge/IEUK%202025-Technology%20&%20Engineering-purple)
 
 LogInsight is a Python-based command-line tool for analysing web server logs to detect suspicious traffic patterns, monitor API usage, and identify traffic spikes.
