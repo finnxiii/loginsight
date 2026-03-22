@@ -1,57 +1,97 @@
-# Traffic Log Analyzer
+# LogInsight — Web Traffic Analysis Tool
 
-This project provides a Python script to analyze web server logs for suspicious (bot) traffic, API usage, and traffic spikes. It helps small teams quickly identify problematic traffic patterns and provides actionable recommendations to reduce server overload.
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-2E2E2E?logo=github&logoColor=white)](https://github.com/yourusername/loginsight)
+![IEUK 2025](https://img.shields.io/badge/IEUK%202025-Technology%20&%20Engineering-purple)
 
-## Features
+LogInsight is a Python-based command-line tool for analysing web server logs to detect suspicious traffic patterns, monitor API usage, and identify traffic spikes.
 
-- Counts total, API, and per-endpoint requests
-- Identifies suspicious user agents (bots, crawlers, scripts)
-- Highlights top IPs and endpoints
-- Shows hourly traffic breakdown
-- Prints sample suspicious user agents
-- Outputs recommendations for mitigation
+Developed as part of the IEUK 2025 programme, the project demonstrates practical application of log parsing, data aggregation, and heuristic-based anomaly detection for real-world system monitoring.
 
-## Requirements
+> [!NOTE]
+> This repository contains a lightweight log analysis tool that parses structured log files, aggregates traffic data, and highlights potential anomalies such as bot activity and abnormal request patterns.
 
-- Python 3.8 or newer
+---
+
+## Overview
+
+LogInsight processes web server logs and extracts key metrics to help understand traffic behaviour:
+
+- Total and API request volume  
+- Per-IP and per-endpoint activity  
+- Suspicious user agents (bots, crawlers, scripts)  
+- Hourly traffic distribution  
+- High-frequency or abnormal request patterns  
+
+The tool is designed to work with structured logs and provide immediate, human-readable insights via the command line.
+
+---
+
+## System Architecture
+
+1. **Parsing Layer**  
+   Log entries are parsed using regular expressions and converted into structured records.
+
+2. **Aggregation Layer**  
+   Traffic data is aggregated using efficient Python data structures:
+   - Requests per IP  
+   - Requests per endpoint  
+   - Hourly traffic counts  
+
+3. **Detection Layer**  
+   Heuristic rules are applied to identify suspicious behaviour:
+   - Known bot patterns in user agents  
+   - High-frequency API usage  
+
+4. **Reporting Layer**  
+   The system outputs summarised insights including:
+   - Traffic statistics  
+   - Top IPs and endpoints  
+   - Suspicious activity  
+   - Time-based traffic trends  
+
+---
+
+## Key Features
+
+- Regex-based parsing of structured log data  
+- Efficient aggregation using `Counter` and `defaultdict`  
+- Heuristic detection of automated or suspicious traffic  
+- Time-based analysis for identifying traffic spikes  
+- Command-line interface for quick inspection  
+- Docker support for reproducible execution  
+
+---
+
+## Tech Stack
+
+### Software
+- Python 3.8+  
+- Standard libraries: `re`, `collections`, `datetime`  
+
+### Infrastructure and Tools
+- Docker (optional containerised execution)  
+- Command-line interface  
+
+---
+
+## Design Considerations
+
+- **Simplicity vs Flexibility:**  
+  The tool prioritises a clear and lightweight implementation while supporting structured log formats.
+
+- **Heuristic Detection:**  
+  Bot detection is rule-based, trading completeness for interpretability and ease of extension.
+
+- **Performance:**  
+  Uses in-memory aggregation for fast analysis of moderate-sized log files.
+
+Future improvement: Extend support for multiple log formats and enable streaming analysis for large-scale logs.
+
+---
 
 ## Usage
 
-1. **Place your log file** (e.g., `sample-log.log`) in the project directory.
-2. **Run the script:**
-   ```sh
-   python analyze_logs.py sample-log.log
-   ```
-   If no filename is given, it defaults to `sample-log.log`.
+Run the analyzer with a log file:
 
-## Docker (Optional)
-
-To run in a container:
-
-1. Build the image:
-   ```sh
-   docker build -t log-analyzer .
-   ```
-2. Run the analyzer:
-   ```sh
-   docker run --rm log-analyzer
-   ```
-   To analyze a different log file, mount it:
-   ```sh
-   docker run --rm -v $(pwd)/your-log.log:/app/your-log.log log-analyzer python analyze_logs.py your-log.log
-   ```
-
-## Log Format
-
-The script expects logs in this format:
-```
-IP - COUNTRY - [DATE:TIME] "METHOD PATH ..." STATUS ... "-" "USER_AGENT" LATENCY
-```
-Example:
-```
-123.45.67.89 - US - [17/07/2025:12:34:56] "GET /api/data ..." 200 ... "-" "Googlebot/2.1 ..." 123
-```
-
-## License
-
-MIT License
+```bash
+python analyze_logs.py sample-log.log
