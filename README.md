@@ -7,10 +7,12 @@ LogInsight is a Python-based command-line tool for analysing web server logs to 
 
 Developed as part of the IEUK 2025 programme, the project demonstrates practical application of log parsing, data aggregation, and heuristic-based anomaly detection for real-world system monitoring.
 
-> [!NOTE]
-> This repository contains a lightweight log analysis tool that parses structured log files, aggregates traffic data, and highlights potential anomalies such as bot activity and abnormal request patterns.
+<br>
 
----
+> [!NOTE]
+> This project emphasises simplicity and usability, providing a lightweight CLI interface that enables quick analysis of log data without requiring complex setup or infrastructure.
+
+<br>
 
 ## Overview
 
@@ -24,32 +26,41 @@ LogInsight processes web server logs and extracts key metrics to help understand
 
 The tool is designed to work with structured logs and provide immediate, human-readable insights via the command line.
 
----
+<br>
 
 ## System Architecture
 
-1. **Parsing Layer**  
-   Log entries are parsed using regular expressions and converted into structured records.
+```mermaid
+flowchart TD
 
-2. **Aggregation Layer**  
-   Traffic data is aggregated using efficient Python data structures:
-   - Requests per IP  
-   - Requests per endpoint  
-   - Hourly traffic counts  
+A[Raw Log Files] --> B[Parsing Layer<br/>Regex-based parsing]
+B --> C[Structured Log Records]
 
-3. **Detection Layer**  
-   Heuristic rules are applied to identify suspicious behaviour:
-   - Known bot patterns in user agents  
-   - High-frequency API usage  
+C --> D[Aggregation Layer]
+D --> D1[Requests per IP]
+D --> D2[Requests per Endpoint]
+D --> D3[Hourly Traffic Counts]
 
-4. **Reporting Layer**  
-   The system outputs summarised insights including:
-   - Traffic statistics  
-   - Top IPs and endpoints  
-   - Suspicious activity  
-   - Time-based traffic trends  
+C --> E[Detection Layer]
+E --> E1[Bot Pattern Detection]
+E --> E2[High-Frequency API Usage Detection]
 
----
+D --> F[Reporting Layer]
+E --> F
+
+F --> G[Traffic Statistics]
+F --> H[Top IPs and Endpoints]
+F --> I[Suspicious Activity Summary]
+F --> J[Time-Based Traffic Trends]
+```
+
+**Flow Summary**
+- Raw log entries are first parsed into structured records using regular expressions.
+- The parsed data is then aggregated to extract request volumes by IP, endpoint, and time period.
+- Heuristic detection rules are applied to identify suspicious behaviour, including bot-like user agents and unusual API request frequency.
+- Finally, the tool generates concise reports highlighting traffic patterns, suspicious activity, and overall usage trends.
+
+<br>
 
 ## Key Features
 
@@ -60,7 +71,7 @@ The tool is designed to work with structured logs and provide immediate, human-r
 - Command-line interface for quick inspection  
 - Docker support for reproducible execution  
 
----
+<br>
 
 ## Tech Stack
 
@@ -72,7 +83,7 @@ The tool is designed to work with structured logs and provide immediate, human-r
 - Docker (optional containerised execution)  
 - Command-line interface  
 
----
+<br>
 
 ## Design Considerations
 
@@ -87,7 +98,7 @@ The tool is designed to work with structured logs and provide immediate, human-r
 
 Future improvement: Extend support for multiple log formats and enable streaming analysis for large-scale logs.
 
----
+<br>
 
 ## Usage
 
@@ -95,3 +106,5 @@ Run the analyzer with a log file:
 
 ```bash
 python analyze_logs.py sample-log.log
+```
+
